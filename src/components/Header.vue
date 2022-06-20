@@ -1,11 +1,26 @@
 <template>
-	<header>
+	<header v-if=" route == '/'">
         <h1>Questions generator</h1>
     </header>
 </template>
 <script>
 export default {
 	name: 'app-header',
+    created() {
+        console.log(this.$router.currentRoute.value);
+    },
+    data() {
+        return {
+            route: this.$router.currentRoute.value.fullPath
+        }
+    },
+    watch: {
+        $route(to, from) {
+            this.route = to.fullPath
+            console.log(to);
+            console.log(from);
+        }
+    }
 };
 </script>
 <style>
