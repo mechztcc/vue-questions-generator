@@ -1,5 +1,5 @@
 <template>
-	<nav>
+	<nav v-if="route != '/login' && route != '/create' ">
 		<ul>
 			<router-link to="/" active-class="active">Home page</router-link>
 
@@ -14,6 +14,16 @@
 <script>
 export default {
 	name: 'app-menu',
+	data() {
+		return {
+			route: this.$router.currentRoute.value.fullPath
+		};
+	},
+	watch: {
+		$route(to) {
+			this.route = to.fullPath
+		}
+	}
 };
 </script>
 <style scoped>
