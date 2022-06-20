@@ -47,6 +47,9 @@ body {
 	height: 100vh;
 }
 .content-router {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 80%;
 }
 </style>

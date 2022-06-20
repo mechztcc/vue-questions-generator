@@ -1,13 +1,14 @@
 <template>
-    <div>
-        <h1>create account page</h1>
-    </div>
+	<CardCreateAccount />
 </template>
 <script>
+import CardCreateAccount from '../components/CardCreateAccount.vue';
+
 export default {
-    
-}
+	name: 'app-create-account',
+	components: {
+		CardCreateAccount,
+	},
+};
 </script>
-<style>
-    
-</style>
+<style></style>
