@@ -12,11 +12,15 @@
 
 				<label for="password">Senha</label>
 				<input type="password" v-model.trim="password" />
-				<span class="error-message" v-if="passwordError">{{ passwordError }}</span>
+				<span class="error-message" v-if="passwordError">{{
+					passwordError
+				}}</span>
 
 				<label for="password">Repita senha</label>
-				<input type="password" v-model.trim="repeatPassword"/>
-				<span class="error-message" v-if="repeatPasswordError">{{ repeatPasswordError }}</span>
+				<input type="password" v-model.trim="repeatPassword" />
+				<span class="error-message" v-if="repeatPasswordError">{{
+					repeatPasswordError
+				}}</span>
 
 				<div class="buttons">
 					<button class="success" type="button" @click="validateForm()">
@@ -25,7 +29,14 @@
 				</div>
 			</form>
 		</div>
-		<div class="card-footer"></div>
+		<div class="card-footer">
+			<div class="footer-content">
+				<span>
+					A criar sua conta você aceita os <b>termos de acesso</b> & nossa
+					<b>politica de privacidade</b>
+				</span>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
@@ -35,31 +46,30 @@ export default {
 		return {
 			email: '',
 			password: '',
-            repeatPassword: '',
+			repeatPassword: '',
 			emailError: '',
 			passwordError: '',
-            repeatPasswordError: ''
+			repeatPasswordError: '',
 		};
 	},
 	methods: {
 		validateForm() {
-			if(!this.email) {
-                this.emailError = 'E-mail é obrigatório'
-            }
-            if(!this.password) {
-                this.passwordError = 'A senha é inválida'
-            }
-            if(this.password != this.repeatPassword) {
-                this.repeatPasswordError = 'Senhas divergentes'
-            }
-            if(this.password&& this.email) {
-               this.passwordError = ''
-               this.emailError = ''
-            }
-            if(this.password == this.repeatPassword) {
-                this.repeatPasswordError = ''
-            }
-            
+			if (!this.email) {
+				this.emailError = 'E-mail é obrigatório';
+			}
+			if (!this.password) {
+				this.passwordError = 'A senha é inválida';
+			}
+			if (this.password != this.repeatPassword) {
+				this.repeatPasswordError = 'Senhas divergentes';
+			}
+			if (this.password && this.email) {
+				this.passwordError = '';
+				this.emailError = '';
+			}
+			if (this.password == this.repeatPassword) {
+				this.repeatPasswordError = '';
+			}
 		},
 	},
 };
@@ -112,7 +122,7 @@ input {
 	align-items: center;
 	padding-bottom: 15px;
 	padding-top: 15px;
-	margin-bottom: 15%;
+	margin-bottom: 5%;
 }
 
 button {
@@ -130,11 +140,22 @@ button {
 }
 
 .error-message {
-    color: white;
-    border: 1px solid orange;
-    background-color: orange;
-    border-radius: 5px;
-    width: 100%;
-    margin-top: 1%;
+	color: white;
+	border: 1px solid orange;
+	background-color: orange;
+	border-radius: 5px;
+	width: 100%;
+	margin-top: 1%;
+}
+
+.card-footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 5%;
+}
+.footer-content {
+	width: 80%;
 }
 </style>
