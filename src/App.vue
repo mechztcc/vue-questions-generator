@@ -1,18 +1,23 @@
 <template>
-	<div class="nav">
-		<Menu />
-	</div>
+	<Header />
 	<div class="content">
-		<router-view></router-view>
+		<div class="nav">
+			<Menu />
+		</div>
+		<div class="content-router">
+			<router-view></router-view>
+		</div>
 	</div>
 </template>
 
 <script>
 import Menu from './components/Menu.vue';
+import Header from './components/Header.vue';
 export default {
 	name: 'App',
 	components: {
 		Menu,
+		Header,
 	},
 };
 </script>
@@ -25,6 +30,7 @@ export default {
 	text-align: center;
 	color: white;
 	display: flex;
+	flex-direction: column;
 }
 
 body {
@@ -32,12 +38,15 @@ body {
 	margin: 0;
 }
 
+.content {
+	display: flex;
+}
+
 .nav {
 	width: 20%;
 	height: 100vh;
-
 }
-.content {
+.content-router {
 	width: 80%;
 }
 </style>
