@@ -18,7 +18,7 @@
 					<button type="button" class="success" @click="validateForm()">
 						Entrar
 					</button>
-					<button type="button" class="default">Criar conta gratuita</button>
+					<button type="button" class="default" @click="navegateTo()">Criar conta gratuita</button>
 				</div>
 			</form>
 		</div>
@@ -65,6 +65,9 @@ export default {
                 console.log('navegate');
             }
 		},
+        navegateTo() {
+            this.$router.push('/create')
+        }
 	},
 };
 </script>

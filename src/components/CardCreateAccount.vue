@@ -26,6 +26,8 @@
 					<button class="success" type="button" @click="validateForm()">
 						Enviar
 					</button>
+
+					<button class="default" @click="navegateTo()">Já sou cadastrado</button>
 				</div>
 			</form>
 		</div>
@@ -81,6 +83,9 @@ export default {
 				this.$router.push('/')
 			}
 		},
+		navegateTo() {
+			this.$router.push('/login')
+		}
 	},
 };
 </script>
@@ -143,10 +148,15 @@ button {
 	padding-right: 15px;
 	padding-left: 15px;
 	border-radius: 5px;
+	margin-top: 1%;
 }
 
 .success {
 	background-color: #00adb5;
+}
+
+.default {
+	background-color: transparent;
 }
 
 .error-message {
