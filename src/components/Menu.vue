@@ -3,11 +3,9 @@
 		<ul>
 			<router-link to="/" active-class="active">Home page</router-link>
 
-			<router-link to="/login" active-class="active">Login</router-link>
+			<router-link to="/questions" active-class="active">Questões</router-link>
 
-			<router-link to="/create" active-class="active">
-				Create account
-			</router-link>
+
 		</ul>
 	</nav>
 </template>
