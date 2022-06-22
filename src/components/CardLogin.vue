@@ -15,8 +15,16 @@
 				<span class="error-message" v-if="passError">{{ passError }}</span>
 
 				<div class="buttons">
-					<button type="button" class="success" @click="validateForm()">
+					<button
+						type="button"
+						class="success"
+						v-if="!isLoading"
+						@click.prevent="validateForm()"
+					>
 						Entrar
+					</button>
+					<button type="button" class="success" disabled v-if="isLoading">
+						Entrando
 					</button>
 					<button type="button" class="default" @click="navegateTo()">
 						Criar conta gratuita
@@ -43,6 +51,7 @@ export default {
 			password: '',
 			emailError: '',
 			passError: '',
+			isLoading: false,
 		};
 	},
 	methods: {
@@ -65,15 +74,24 @@ export default {
 
 			if (!this.emailError && !this.passError) {
 				console.log('navegate');
-				this.login()
+				this.login();
 			}
 		},
 		async login() {
-			const token = await this.axios.post(
-				'http://localhost:3000/users/signin',
-				{ email: this.email, password: this.password }
-			);
-			console.log(token);
+			this.isLoading = true;
+			const response = await this.axios
+				.post('http://localhost:3000/users/signin', {
+					email: this.email,
+					password: this.password,
+				})
+				.catch(() => {
+					this.isLoading = false;
+				});
+			this.isLoading = false;
+			if (response.data) {
+				console.log(response.data);
+				this.$router.push('/');
+			}
 		},
 		navegateTo() {
 			this.$router.push('/create');
