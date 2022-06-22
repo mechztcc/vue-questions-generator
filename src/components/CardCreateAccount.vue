@@ -160,6 +160,7 @@ input {
 	border: none;
 	width: 100%;
 	margin-top: 2%;
+	outline: none;
 }
 
 .buttons {
