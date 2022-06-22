@@ -56,7 +56,6 @@
 	</div>
 </template>
 <script>
-import axios from 'axios';
 export default {
 	name: 'app-card-create',
 	data() {
@@ -104,7 +103,7 @@ export default {
 
 		async createAccount() {
 			this.isLoading = true;
-			await axios
+			await this.axios
 				.post('http://localhost:3000/users/signup', {
 					email: this.email,
 					password: this.password,
