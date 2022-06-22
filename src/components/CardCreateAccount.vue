@@ -6,6 +6,9 @@
 		</div>
 		<div class="card-body">
 			<form>
+				<label for="name">Nome Completo</label>
+				<input type="text" v-model="name" />
+
 				<label for="email">E-mail</label>
 				<input type="text" v-model.lazy.trim="email" />
 				<span class="error-message" v-if="emailError">{{ emailError }}</span>
@@ -27,7 +30,9 @@
 						Enviar
 					</button>
 
-					<button class="default" @click="navegateTo()">Já sou cadastrado</button>
+					<button class="default" @click="navegateTo()">
+						Já sou cadastrado
+					</button>
 				</div>
 			</form>
 		</div>
@@ -42,17 +47,19 @@
 	</div>
 </template>
 <script>
+import axios from 'axios'
 export default {
 	name: 'app-card-create',
 	data() {
 		return {
+			name: '',
 			email: '',
 			password: '',
 			repeatPassword: '',
 			emailError: '',
 			passwordError: '',
 			repeatPasswordError: '',
-			hasError: false
+			hasError: false,
 		};
 	},
 	methods: {
@@ -63,7 +70,7 @@ export default {
 			}
 			if (!this.password) {
 				this.passwordError = 'A senha é inválida';
-				this.hasError = true
+				this.hasError = true;
 			}
 			if (this.password != this.repeatPassword) {
 				this.repeatPasswordError = 'Senhas divergentes';
@@ -79,13 +86,19 @@ export default {
 				this.hasError = false;
 			}
 
-			if(!this.hasError) {
-				this.$router.push('/')
+			if (!this.hasError) {
+				// this.$router.push('/');
+				this.createAccount()
 			}
 		},
+
+		async createAccount() {
+			const user = await axios.post('http://localhost:3000/users/signup', { email: this.email, password: this.password, name: this.name });
+			console.log(user);
+		},
 		navegateTo() {
-			this.$router.push('/login')
-		}
+			this.$router.push('/login');
+		},
 	},
 };
 </script>
