@@ -5,9 +5,9 @@
 			<hr />
 		</div>
 		<div class="card-body">
-			<form >
+			<form>
 				<label for="email">E-mail</label>
-				<input type="text" v-model="email"/>
+				<input type="text" v-model="email" />
 				<span class="error-message" v-if="emailError">{{ emailError }}</span>
 
 				<label for="password">Senha</label>
@@ -18,7 +18,9 @@
 					<button type="button" class="success" @click="validateForm()">
 						Entrar
 					</button>
-					<button type="button" class="default" @click="navegateTo()">Criar conta gratuita</button>
+					<button type="button" class="default" @click="navegateTo()">
+						Criar conta gratuita
+					</button>
 				</div>
 			</form>
 		</div>
@@ -53,21 +55,29 @@ export default {
 				this.passError = 'Senha inválida';
 			}
 
-            if(this.password && this.password.length >= 6) {
-                this.passError = ''
-            }
+			if (this.password && this.password.length >= 6) {
+				this.passError = '';
+			}
 
-            if(this.email && this.email.includes('@')) {
-                this.emailError = ''
-            }
+			if (this.email && this.email.includes('@')) {
+				this.emailError = '';
+			}
 
-            if(!this.emailError && !this.passError) {
-                console.log('navegate');
-            }
+			if (!this.emailError && !this.passError) {
+				console.log('navegate');
+				this.login()
+			}
 		},
-        navegateTo() {
-            this.$router.push('/create')
-        }
+		async login() {
+			const token = await this.axios.post(
+				'http://localhost:3000/users/signin',
+				{ email: this.email, password: this.password }
+			);
+			console.log(token);
+		},
+		navegateTo() {
+			this.$router.push('/create');
+		},
 	},
 };
 </script>
