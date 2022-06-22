@@ -90,11 +90,17 @@ export default {
 			this.isLoading = false;
 			if (response?.data) {
 				console.log(response.data);
+				const data = response.data;
+				this.saveOnLocal(data.jwtToken, data.userId);
 				this.$router.push('/');
 			}
 		},
 		navegateTo() {
 			this.$router.push('/create');
+		},
+		saveOnLocal(token, userId) {
+			localStorage.setItem('token', token);
+			localStorage.setItem('userId', userId);
 		},
 	},
 };
