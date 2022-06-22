@@ -26,8 +26,17 @@
 				}}</span>
 
 				<div class="buttons">
-					<button class="success" type="button" @click="validateForm()">
+					<button
+						class="success"
+						type="button"
+						v-if="!isLoading"
+						@click="validateForm()"
+					>
 						Enviar
+					</button>
+
+					<button class="success" type="button" v-if="isLoading" disabled>
+						Enviando
 					</button>
 
 					<button class="default" @click="navegateTo()">
@@ -47,7 +56,7 @@
 	</div>
 </template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
 export default {
 	name: 'app-card-create',
 	data() {
@@ -60,6 +69,7 @@ export default {
 			passwordError: '',
 			repeatPasswordError: '',
 			hasError: false,
+			isLoading: false,
 		};
 	},
 	methods: {
@@ -88,13 +98,24 @@ export default {
 
 			if (!this.hasError) {
 				// this.$router.push('/');
-				this.createAccount()
+				this.createAccount();
 			}
 		},
 
 		async createAccount() {
-			const user = await axios.post('http://localhost:3000/users/signup', { email: this.email, password: this.password, name: this.name });
-			console.log(user);
+			this.isLoading = true;
+			await axios
+				.post('http://localhost:3000/users/signup', {
+					email: this.email,
+					password: this.password,
+					name: this.name,
+				})
+				.catch(() => {
+					this.isLoading = false;
+				});
+
+			this.isLoading = false;
+			this.navegateTo()
 		},
 		navegateTo() {
 			this.$router.push('/login');

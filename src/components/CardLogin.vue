@@ -88,7 +88,7 @@ export default {
 					this.isLoading = false;
 				});
 			this.isLoading = false;
-			if (response.data) {
+			if (response?.data) {
 				console.log(response.data);
 				this.$router.push('/');
 			}
