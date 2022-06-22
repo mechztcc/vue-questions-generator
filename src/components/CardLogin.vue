@@ -1,38 +1,31 @@
 <template>
 	<div class="card">
 		<div class="card-header">
-			<h2>Crie sua conta gratuita</h2>
+			<h2>Bem-vindo novamente</h2>
 			<hr />
 		</div>
 		<div class="card-body">
-			<form>
+			<form >
 				<label for="email">E-mail</label>
-				<input type="text" v-model.lazy.trim="email" />
+				<input type="text" v-model="email"/>
 				<span class="error-message" v-if="emailError">{{ emailError }}</span>
 
 				<label for="password">Senha</label>
-				<input type="password" v-model.trim="password" />
-				<span class="error-message" v-if="passwordError">{{
-					passwordError
-				}}</span>
-
-				<label for="password">Repita senha</label>
-				<input type="password" v-model.trim="repeatPassword" />
-				<span class="error-message" v-if="repeatPasswordError">{{
-					repeatPasswordError
-				}}</span>
+				<input type="password" v-model="password" />
+				<span class="error-message" v-if="passError">{{ passError }}</span>
 
 				<div class="buttons">
-					<button class="success" type="button" @click="validateForm()">
-						Enviar
+					<button type="button" class="success" @click="validateForm()">
+						Entrar
 					</button>
+					<button type="button" class="default">Criar conta gratuita</button>
 				</div>
 			</form>
 		</div>
 		<div class="card-footer">
 			<div class="footer-content">
 				<span>
-					A criar sua conta você aceita os <b>termos de acesso</b> & nossa
+					A entrar você aceita os <b>termos de acesso</b> & nossa
 					<b>politica de privacidade</b>
 				</span>
 			</div>
@@ -41,50 +34,41 @@
 </template>
 <script>
 export default {
-	name: 'app-card-create',
+	name: 'app-card-login',
 	data() {
 		return {
 			email: '',
 			password: '',
-			repeatPassword: '',
 			emailError: '',
-			passwordError: '',
-			repeatPasswordError: '',
-			hasError: false
+			passError: '',
 		};
 	},
 	methods: {
 		validateForm() {
 			if (!this.email) {
 				this.emailError = 'E-mail é obrigatório';
-				this.hasError = true;
-			}
-			if (!this.password) {
-				this.passwordError = 'A senha é inválida';
-				this.hasError = true
-			}
-			if (this.password != this.repeatPassword) {
-				this.repeatPasswordError = 'Senhas divergentes';
-				this.hasError = true;
-			}
-			if (this.password && this.email) {
-				this.passwordError = '';
-				this.emailError = '';
-				this.hasError = false;
-			}
-			if (this.password == this.repeatPassword) {
-				this.repeatPasswordError = '';
-				this.hasError = false;
 			}
 
-			if(!this.hasError) {
-				this.$router.push('/')
+			if (!this.password || this.password.length < 6) {
+				this.passError = 'Senha inválida';
 			}
+
+            if(this.password && this.password.length >= 6) {
+                this.passError = ''
+            }
+
+            if(this.email && this.email.includes('@')) {
+                this.emailError = ''
+            }
+
+            if(!this.emailError && !this.passError) {
+                console.log('navegate');
+            }
 		},
 	},
 };
 </script>
-<style>
+<style scoped>
 .card {
 	display: flex;
 	flex-direction: column;
@@ -143,10 +127,15 @@ button {
 	padding-right: 15px;
 	padding-left: 15px;
 	border-radius: 5px;
+	margin-top: 1%;
 }
 
 .success {
 	background-color: #00adb5;
+}
+
+.default {
+	background-color: transparent;
 }
 
 .error-message {

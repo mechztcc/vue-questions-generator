@@ -24,7 +24,7 @@ header {
 	background-color: #00adb5;
 	height: 60px;
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 	align-items: center;
 	border-bottom: 2px solid white;
 }
