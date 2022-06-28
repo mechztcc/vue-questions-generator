@@ -26,7 +26,7 @@ export default {
 </script>
 <style scoped>
 nav {
-	height: 100%;
+	height: inherit;
 	background-color: #393e46;
 	width: 100%;
 	box-shadow: rgba(231, 231, 231, 0.221) 1.95px 1.95px 2.6px;
