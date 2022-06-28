@@ -98,7 +98,7 @@ export default {
 			this.$router.push('/create');
 		},
 		saveOnLocal(token, userId) {
-			localStorage.setItem('token', token);
+			localStorage.setItem('token', `Bearer ${token}`);
 			localStorage.setItem('userId', userId);
 		},
 	},
