@@ -6,18 +6,25 @@ import VueAxios from 'vue-axios';
 
 const app = createApp(App);
 
+// axios.defaults.headers.common['Authorization'] = 'token'
 axios.interceptors.request.use((config) => {
-	console.log(`REQUEST`, config);
 	if (localStorage.getItem('token')) {
 		config.headers['Authorization'] = localStorage.getItem('token');
 	}
 	return config;
 });
 
-axios.interceptors.response.use((config) => {
-	console.log(`RESPONSE`, config.status);
-	return config;
-});
+axios.interceptors.response.use(
+	(response) => {
+		return response;
+	},
+	(error) => {
+		if (error.response?.data) {
+			alert(error.response.data.message);
+		}
+		console.log(error.response?.data);
+	}
+);
 
 app.use(router);
 app.use(VueAxios, axios);

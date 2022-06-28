@@ -43,6 +43,7 @@
 	</div>
 </template>
 <script>
+
 export default {
 	name: 'app-card-login',
 	data() {
@@ -84,8 +85,9 @@ export default {
 					email: this.email,
 					password: this.password,
 				})
-				.catch(() => {
+				.catch((err) => {
 					this.isLoading = false;
+					console.log(err)
 				});
 			this.isLoading = false;
 			if (response?.data) {
